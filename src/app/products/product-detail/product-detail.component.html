@@ -1,0 +1,20 @@
+<div *ngIf="product" class="product-detail">
+  <h2>{{ product.name }} Details</h2>
+  <div><b>Category:</b> {{ product.category }}</div>
+  <div><b>Product Code:</b> {{ product.productCode }}</div>
+  <div><b>Price:</b> ${{ product.price }}</div>
+  <div><b>Minimum Quantity:</b> {{ product.minimumQuantity }}</div>
+  <div><b>Discount Rate:</b> {{ product.discountRate }}%</div>
+  <div>
+    <b>Image:</b>
+    <img
+      *ngIf="product.imagePath"
+      [src]="product.imagePath"
+      alt="Product image"
+      class="product-image"
+    />
+  </div>
+</div>
+<div *ngIf="!product">
+  <p>Product not found!</p>
+</div>
