@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-product-detail',
@@ -12,6 +13,7 @@ export class ProductDetailComponent implements OnInit {
   product: Product | null = null;
 
   constructor(
+    private location: Location,
     private route: ActivatedRoute,
     private productService: ProductService
   ) {}
@@ -31,5 +33,14 @@ export class ProductDetailComponent implements OnInit {
         error: (err) => console.error(err),
       });
     }
+  }
+  goBack(): void {
+    this.location.back();
+  }
+  getImageUrl(imagePath: string): string {
+    // Assuming the backend serves images from a route like '/Products/Images/'
+    return `http://localhost:5234/Products/Images/${encodeURIComponent(
+      imagePath
+    )}`;
   }
 }

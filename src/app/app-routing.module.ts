@@ -1,11 +1,11 @@
-//app-routing.module.ts
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {
-    path: 'login',
+    path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
   {
@@ -13,7 +13,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./products/products.module').then((m) => m.ProductsModule),
   },
-  { path: '', redirectTo: '/products', pathMatch: 'full' },
+  { path: '', component: HomeComponent },
 ];
 
 @NgModule({

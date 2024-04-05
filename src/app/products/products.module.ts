@@ -7,6 +7,7 @@ import { ProductCreateComponent } from './product-create/product-create.componen
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductDeleteComponent } from './product-delete/product-delete.component';
+import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,9 @@ import { ProductDeleteComponent } from './product-delete/product-delete.componen
     ProductDetailComponent,
     ProductEditComponent,
     ProductDeleteComponent,
+    ConfirmModalComponent,
   ],
   imports: [CommonModule, ProductsRoutingModule, ReactiveFormsModule],
+  exports: [ConfirmModalComponent],
 })
 export class ProductsModule {}

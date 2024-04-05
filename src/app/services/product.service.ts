@@ -3,13 +3,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Product } from '../models/product';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
   private apiUrl = 'http://localhost:5234/Products'; // Adjust the URL as needed
-
+  private productDeletionSource = new BehaviorSubject<number | null>(null);
+  productDeletion$ = this.productDeletionSource.asObservable();
   constructor(private http: HttpClient) {}
 
   getAllProducts(): Observable<Product[]> {
@@ -40,11 +42,16 @@ export class ProductService {
     }
     return this.http.post(this.apiUrl, formData);
   }
-  updateProduct(product: Product): Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/${product.id}`, product);
+  updateProductWithImage(id: number, formData: FormData): Observable<any> {
+    // Assuming your API endpoint for updating a product with an image is similar to the create endpoint,
+    // but with a PUT request and including the product's ID in the URL.
+    return this.http.put(`${this.apiUrl}/${id}`, formData);
   }
 
   deleteProduct(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+  notifyProductDeletion(productId: number) {
+    this.productDeletionSource.next(productId);
   }
 }

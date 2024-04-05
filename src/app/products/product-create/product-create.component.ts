@@ -12,7 +12,7 @@ import { ProductService } from '../../services/product.service'; // Adjust the p
 export class ProductCreateComponent implements OnInit {
   createForm!: FormGroup;
   selectedFile: File | null = null;
-
+  backendErrors: string[] = [];
   constructor(
     private fb: FormBuilder,
     private productService: ProductService,
@@ -30,6 +30,7 @@ export class ProductCreateComponent implements OnInit {
         0,
         [Validators.required, Validators.min(0), Validators.max(100)],
       ],
+      Image: [null],
     });
   }
 
@@ -74,15 +75,18 @@ export class ProductCreateComponent implements OnInit {
       if (this.selectedFile) {
         formData.append('Image', this.selectedFile, this.selectedFile.name);
       }
-      for (let [key, value] of formData.entries()) {
-        console.log(key, value);
-      }
+      // for (let [key, value] of formData.entries()) {
+      //   console.log(key, value);
+      // }
       this.productService.createProductWithImage(formData).subscribe({
         next: () => this.router.navigate(['/products']),
-        error: (err) => console.error('Failed to create product:', err),
+        error: (err) =>
+          (this.backendErrors = [
+            err.error || 'Signup failed. Please try again.',
+          ]),
       });
     } else {
-      console.error('Form is not valid');
+      this.backendErrors = ['Form is not valid'];
       // Optionally trigger UI feedback for validation errors
     }
   }

@@ -1,0 +1,118 @@
+<div>
+  <div class="w-full bg-teal-900 px-4">
+    <div
+      class="shadow-lg w-full flex md:hidden justify-between items-center py-4"
+    >
+      <a class="text-xl font-bold text-white" routerLink="/">E-Commerce</a>
+      <button
+        class="block focus:outline-none"
+        (click)="toggleNavbar()"
+        aria-label="Toggle navigation"
+      >
+        <!-- Hamburger Icon -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="white"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16m-7 6h7"
+          />
+        </svg>
+      </button>
+    </div>
+    <!-- Fullscreen Overlay Navigation Menu for Mobile -->
+    <div
+      class="md:hidden absolute top-0 left-0 h-full w-full bg-black bg-opacity-70 z-10"
+      *ngIf="isOpen"
+      [@fadeInOut]="isOpen ? 'in' : 'out'"
+    >
+      <div class="p-5">
+        <ul class="space-y-4 flex flex-col items-end">
+          <button
+            class="text-white text-3xl p-3"
+            (click)="toggleNavbar()"
+            aria-label="Close navigation menu"
+          >
+            &times;
+          </button>
+          <li>
+            <a routerLink="/products" class="text-white mr-10 p-2">Products</a>
+          </li>
+          <li *ngIf="!hasToken()">
+            <a routerLink="/auth/login" class="text-white mr-10 p-2">Login</a>
+          </li>
+          <li *ngIf="!hasToken()">
+            <a routerLink="/auth/signup" class="text-white mr-10 p-2">Signup</a>
+          </li>
+          <li *ngIf="hasToken()">
+            <button (click)="logout()" class="text-white mr-10 p-2">
+              Logout
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- Static Navbar for Desktop -->
+  <div class="w-10/12">
+    <div
+      class="md:flex w-10/12 top-0 left-0 right-0 hidden bg-teal-900 mx-auto fixed mt-4 p-3 px-6 rounded-2xl"
+    >
+      <a class="text-xl font-bold text-white w-2/6" routerLink="/"
+        >E-Commerce</a
+      >
+
+      <div class="hidden md:flex items-center justify-center w-4/6" id="navbar">
+        <ul class="flex space-x-8">
+          <li class="nav-item" routerLinkActive="text-blue-500">
+            <a
+              class="nav-link text-white hover:text-gray-300"
+              routerLink="/products"
+              >Products</a
+            >
+          </li>
+          <li
+            *ngIf="!hasToken()"
+            class="nav-item"
+            routerLinkActive="text-blue-500"
+          >
+            <a
+              class="nav-link text-white hover:text-gray-300"
+              routerLink="/auth/login"
+              >Login</a
+            >
+          </li>
+          <li
+            *ngIf="!hasToken()"
+            class="nav-item"
+            routerLinkActive="text-blue-500"
+          >
+            <a
+              class="nav-link text-white hover:text-gray-300"
+              routerLink="/auth/signup"
+              >Signup</a
+            >
+          </li>
+          <li
+            *ngIf="hasToken()"
+            class="nav-item"
+            routerLinkActive="text-blue-500"
+          >
+            <button
+              (click)="logout()"
+              class="nav-link text-white hover:text-gray-300"
+            >
+              logout
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

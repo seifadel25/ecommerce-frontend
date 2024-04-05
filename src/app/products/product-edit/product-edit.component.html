@@ -1,13 +1,99 @@
-<p>product-edit works!</p>
-<!-- Example form input with TailwindCSS -->
-<div class="mb-4">
-  <label for="name" class="block text-gray-700 text-sm font-bold mb-2"
-    >Product Name:</label
-  >
-  <input
-    type="text"
-    id="name"
-    formControlName="name"
-    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-  />
+<!-- product-edit.component.html -->
+<div class="max-w-2xl mx-auto my-10 px-4 py-8 bg-white shadow-md rounded-lg">
+  <form [formGroup]="editForm" (ngSubmit)="onSubmit()" class="space-y-6">
+    <div>
+      <label for="name" class="block text-sm font-medium text-gray-700"
+        >Name</label
+      >
+      <input
+        type="text"
+        id="name"
+        formControlName="Name"
+        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+      />
+    </div>
+
+    <div>
+      <label for="category" class="block text-sm font-medium text-gray-700"
+        >Category</label
+      >
+      <input
+        type="text"
+        id="category"
+        formControlName="Category"
+        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+      />
+    </div>
+
+    <div>
+      <label for="productCode" class="block text-sm font-medium text-gray-700"
+        >Product Code</label
+      >
+      <input
+        type="text"
+        id="productCode"
+        formControlName="ProductCode"
+        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+      />
+    </div>
+
+    <div>
+      <label for="price" class="block text-sm font-medium text-gray-700"
+        >Price</label
+      >
+      <input
+        type="number"
+        id="price"
+        formControlName="Price"
+        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+      />
+    </div>
+
+    <div>
+      <label
+        for="minimumQuantity"
+        class="block text-sm font-medium text-gray-700"
+        >Minimum Quantity</label
+      >
+      <input
+        type="number"
+        id="minimumQuantity"
+        formControlName="MinimumQuantity"
+        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+      />
+    </div>
+
+    <div>
+      <label for="discountRate" class="block text-sm font-medium text-gray-700"
+        >Discount Rate (%)</label
+      >
+      <input
+        type="number"
+        id="discountRate"
+        formControlName="DiscountRate"
+        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+      />
+    </div>
+
+    <div>
+      <label for="image" class="block text-sm font-medium text-gray-700"
+        >Product Image</label
+      >
+      <input
+        type="file"
+        id="image"
+        (change)="onFileSelected($event)"
+        class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
+      />
+    </div>
+
+    <div class="flex justify-end">
+      <button
+        type="submit"
+        class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+      >
+        Update Product
+      </button>
+    </div>
+  </form>
 </div>

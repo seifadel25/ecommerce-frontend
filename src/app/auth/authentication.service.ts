@@ -34,6 +34,24 @@ export class AuthenticationService {
     this.isAuthenticatedSubject.next(false);
     // Additional logout operations as needed
   }
+  // In authentication.service.ts
+
+  signup(user: {
+    userName: string;
+    password: string;
+    email: string;
+    Id: number;
+    /* include other user properties as needed */
+  }): Observable<any> {
+    const signupUrl = 'http://localhost:5234/Users'; // Adjust based on your API endpoint for creating users
+    return this.http.post<any>(signupUrl, user).pipe(
+      tap((response) => console.log('Signup response:', response)),
+      catchError((error) => {
+        console.error('signup error:', error);
+        return throwError(() => error);
+      }) // Reuse the existing error handling method
+    );
+  }
 
   // Token management methods
   private setToken(token: string): void {

@@ -1,1 +1,7 @@
-<p>product-delete works!</p>
+<!-- product-delete.component.html -->
+<button (click)="confirmModal.open()">Delete Product</button>
+<app-confirm-modal
+  #confirmModal
+  (confirm)="onModalConfirm($event)"
+  [message]="'Are you sure you want to delete this product?'"
+></app-confirm-modal>

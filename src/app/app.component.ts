@@ -14,9 +14,6 @@ import { AuthenticationService } from './auth/authentication.service';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'ecommerce-frontend';
-  isOpen = false; // Initialize isOpen as false
-
   constructor(
     private router: Router,
     private authService: AuthenticationService
@@ -30,12 +27,5 @@ export class AppComponent {
         console.log('NavigationError:', event.error);
       }
     });
-  }
-
-  hasToken(): boolean {
-    return this.authService.hasToken();
-  }
-  toggleNavbar() {
-    this.isOpen = !this.isOpen;
   }
 }

@@ -1,7 +1,5 @@
-//login.component.ts
-
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router'; // Import Router
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../authentication.service';
 
@@ -12,11 +10,12 @@ import { AuthenticationService } from '../authentication.service';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
+  backendErrors: string[] = [];
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthenticationService,
-    private router: Router // Inject Router
+    private router: Router
   ) {}
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -26,28 +25,21 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log('Form Submitted', this.loginForm.value);
-    console.log('Is Form Valid?', this.loginForm.valid);
-    console.log('Username Valid?', this.loginForm.get('username')!.valid);
-    console.log('Password Valid?', this.loginForm.get('password')!.valid);
-    console.log('Form Errors:', this.loginForm.errors);
     if (this.loginForm.valid) {
-      console.log('Form Submitted', this.loginForm.value);
       this.authService.login(this.loginForm.value).subscribe({
         next: (response) => {
-          console.log('Login successful:', response);
           localStorage.setItem('token', response.token); // Assuming the response contains a token
-          console.log('Login successful:', response);
           // Navigate to another route or show login success message
-          this.router.navigate(['/products']); // Navigate to Products route
+          this.router.navigate(['/']); // Navigate to Products route
         },
         error: (error) => {
-          console.error('Login failed:', error);
-          // Handle login error (e.g., show an error message)
+          this.backendErrors = [
+            error.error || 'Signup failed. Please try again.',
+          ]; // Handle login error (e.g., show an error message)
         },
       });
     } else {
-      console.error('Form is invalid');
+      this.backendErrors = ['Form is not valid'];
     }
   }
 }

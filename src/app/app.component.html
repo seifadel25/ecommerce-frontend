@@ -1,58 +1,6 @@
-<div>
-  <nav>
-    <!-- app.component.html -->
-    <nav class="bg-gray-100 shadow-lg">
-      <div class="container mx-auto px-4">
-        <div class="flex justify-between items-center py-4">
-          <a class="text-xl font-bold text-gray-800" routerLink="/"
-            >E-Commerce</a
-          >
-          <button
-            class="block lg:hidden focus:outline-none"
-            aria-label="Toggle navigation"
-          >
-            <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
-              <path
-                *ngIf="!isOpen"
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M3 5h18v1H3V5zm0 4h18v1H3V9zm18 4H3v1h18v-1zM3 18h18v1H3v-1z"
-              />
-              <path
-                *ngIf="isOpen"
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M4 6h16v2H4V6zm0 7h16v2H4v-2zm0 7h16v2H4v-2z"
-              />
-            </svg>
-          </button>
-          <div class="hidden lg:flex lg:items-center lg:w-auto" id="navbar">
-            <ul class="lg:flex items-center justify-end space-x-8">
-              <li class="nav-item" routerLinkActive="text-blue-500">
-                <a
-                  class="nav-link text-gray-800 hover:text-blue-500"
-                  routerLink="/products"
-                  >Products</a
-                >
-              </li>
-              <li
-                *ngIf="!hasToken()"
-                class="nav-item"
-                routerLinkActive="text-blue-500"
-              >
-                <a
-                  class="nav-link text-gray-800 hover:text-blue-500"
-                  routerLink="/login"
-                  >Login</a
-                >
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </nav>
-
-    <!-- Your other content here -->
-  </nav>
-  <router-outlet />
+<div class="bg-gray-200 w-full h-full pb-20 min-h-screen">
+  <app-navbar></app-navbar>
+  <div class="md:pt-20">
+    <router-outlet />
+  </div>
 </div>
